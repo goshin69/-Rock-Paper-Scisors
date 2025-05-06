@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Rock-Paper-Scisors</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        .choices {
+            margin: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 18px;
+            margin: 0 10px;
+            cursor: pointer;
+        }
+        #result {
+            font-size: 24px;
+            margin: 20px;
+            font-weight: bold;
+        }
+        .score {
+            font-size: 20px;
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Rock-Paper-Scisors</h1>
+    
+    <div class="choices">
+        <button onclick="playGame('piedra')">Rock ✊</button>
+        <button onclick="playGame('papel')">Paper ✋</button>
+        <button onclick="playGame('tijera')">Scisors ✌️</button>
+    </div>
+    
+    <div id="result">Elige una opción para comenzar</div>
+    
+    <div class="score">
+        Jugador: <span id="player-score">0</span> - 
+        Computadora: <span id="computer-score">0</span>
+    </div>
+    
+    <script>
+        let playerScore = 0;
+        let computerScore = 0;
+        
+        function playGame(playerChoice) {
+            // Opciones posibles
+            const options = ['piedra', 'papel', 'tijera'];
+            
+            // Elección aleatoria de la computadora
+            const computerChoice = options[Math.floor(Math.random() * options.length)];
+            
+            // Determinar el resultado
+            let result;
+            
+            if (playerChoice === computerChoice) {
+                result = "¡Empate!";
+            } else if (
+                (playerChoice === 'piedra' && computerChoice === 'tijera') ||
+                (playerChoice === 'papel' && computerChoice === 'piedra') ||
+                (playerChoice === 'tijera' && computerChoice === 'papel')
+            ) {
+                result = "¡Ganaste!";
+                playerScore++;
+            } else {
+                result = "¡Perdiste!";
+                computerScore++;
+            }
+            
+            // Mostrar resultados
+            document.getElementById('result').textContent = 
+                `Elegiste ${playerChoice}, la computadora eligió ${computerChoice}. ${result}`;
+            
+            // Actualizar marcador
+            document.getElementById('player-score').textContent = playerScore;
+            document.getElementById('computer-score').textContent = computerScore;
+        }
+    </script>
+</body>
+</html>
